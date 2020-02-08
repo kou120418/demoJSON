@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="dataArea">
+    <h1>請輸入您想搜尋的年齡區間</h1>
+    <label for="">從</label>
+    <input type="search" id="fromAge1">
+    <label for="">歲，到</label>
+    <input type="search" id="toAge2">
+    <label for="">歲。</label>
+    <button onclick="showMeList()">搜尋</button>
+    <div id="getList">
+
+    </div>
+  </div>
+
+  <style>
+    * {
+      font-family: '微軟正黑體';
+    }
+
+    ul {
+      display: inline-block;
+      padding: 10px;
+    }
+
+    li {
+      border: 1px solid #000;
+      display: block;
+      list-style: none;
+      width: 500px;
+      height: 25px;
+      margin: 0px;
+      margin-top: 10px;
+      padding: 5px;
+    }
+  </style>
+
+  <script>
+    let arr = [{
+        id: 1,
+        name: "Mary",
+        age: 12
+      },
+      {
+        id: 2,
+        name: "Tim",
+        age: 15
+      },
+      {
+        id: 3,
+        name: "Alex",
+        age: 17
+      },
+      {
+        id: 4,
+        name: "Eve",
+        age: 20
+      },
+      {
+        id: 5,
+        name: "Sara",
+        age: 22
+      },
+      {
+        id: 6,
+        name: "Michael",
+        age: 30
+      },
+      {
+        id: 7,
+        name: "Willson",
+        age: 40
+      },
+      {
+        id: 8,
+        name: "Adam",
+        age: 45
+      },
+      {
+        id: 9,
+        name: "Steve",
+        age: 65
+      },
+      {
+        id: 10,
+        name: "Phill",
+        age: 70
+      }
+    ];
+
+    function showMeList() {
+      const value1 = document.getElementById("fromAge1").value;
+      const value2 = document.getElementById("toAge2").value;
+      const matchData = arr.filter(function (people) {
+        return (people.age >= value1 && people.age <= value2) || (people.age >= value2 && people.age <= value1);
+      });
+      // console.log(value1);
+      // console.log(value2);
+      // console.table(matchData);
+      document.getElementById('getList').innerHTML = '';
+      for (let i = 0; i < matchData.length; i++) {
+        let dataDisplay = "<li class='getResult'>{{id}}.{{name}} / {{age}}歲</li>";
+        let changeLi = dataDisplay.replace("{{id}}", matchData[i].id)
+          .replace("{{name}}", matchData[i].name)
+          .replace("{{age}}", matchData[i].age);
+        document.getElementById('getList').innerHTML += changeLi;
+      };
+    }
+  </script>
+
+</body>
+
+</html>
